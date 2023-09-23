@@ -94,10 +94,6 @@ form.login a {
     background-color: #EA4335;
 }
 
-form.login a:nth-child(2) {
-    background-color: #4285F4;
-}
-
 form fieldset{
     display: flex;
     flex-direction: column;

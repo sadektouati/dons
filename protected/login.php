@@ -15,17 +15,6 @@ $client->addScope("profile");
 
 $ggl_loginUrl = $client->createAuthUrl();
 
-# example-obtain-from-js-cookie-app.php
-$fb = new Facebook\Facebook([
-	'app_id' => '',
-	'app_secret' => '',
-	'default_graph_version' => 'v2.12',
-]);
-// Get the FacebookRedirectLoginHelper
-$helper = $fb->getRedirectLoginHelper();
-
-$permissions = ['email', 'public_profile']; // optional
-$fb_loginUrl = $helper->getLoginUrl('https://dons.nextpixel.dz/signin/fb', $permissions);
 
 ?>
 
@@ -33,9 +22,6 @@ $fb_loginUrl = $helper->getLoginUrl('https://dons.nextpixel.dz/signin/fb', $perm
 	<form class="login">
 		<a href="<?= $ggl_loginUrl ?>">
 			باستخدام الجيمايل
-		</a>
-		<a href="<?= $fb_loginUrl ?>">
-			باستخدام الفيسبوك
 		</a>
 	</form>
 </main>
