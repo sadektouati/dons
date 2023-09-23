@@ -1,9 +1,5 @@
 <?php
 
-$clientID = '308602626807-8efu7nhjrb0isiv6c32e59rrtof42jau.apps.googleusercontent.com';
-$clientSecret = 'cL2oS4167JqztK9ZCbOKFGSy';
-$redirectUri = 'https://tijelabine.com/socialauth/ggl';
-
 // create Client Request to access Google API
 $client = new Google_Client();
 $client->setClientId($clientID);
