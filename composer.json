@@ -1,0 +1,6 @@
+{
+    "require": {
+        "google/apiclient": "^2.9",
+        "nickdnk/graph-sdk": "^7.0"
+    }
+}
