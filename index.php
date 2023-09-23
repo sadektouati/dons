@@ -10,15 +10,12 @@ require('vendor/autoload.php');
 require('db/connection.php');
 require('lib/index.php');
 
-if( empty($_SESSION['social_id']) == false and ($url == '/login' or $url == '/signin/fb' or $url == '/signin/ggl') ) header('location: /');
+if( empty($_SESSION['social_id']) == false and ($url == '/login' or $url == '/signin/ggl') ) header('location: /');
 
 include('protected/header.php');
 
     if( ( $url == '/profile' or $url == '/login' ) and empty($_SESSION['social_id']) ){
         include('protected/login.php');
-
-    }elseif( $url == '/signin/fb' and empty($_SESSION['social_id']) ){
-        include('protected/social/fb.php');
 
     }elseif( $url == '/signin/ggl' and empty($_SESSION['social_id']) ){
         include('protected/social/ggl.php');
