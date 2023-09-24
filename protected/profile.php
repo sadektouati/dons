@@ -1,12 +1,14 @@
 <?php
 
 $error = [];
-$isDisabled = isGetedNullable('edit') ? '' : 'disabled';
+$isDisabled = isGetedNullable('edit') || isGetedNullable('save') ? '' : 'disabled';
 
 if(isGetedNullable('save')){
-    $_GET['edit'] = 'true';
+
+    $chooseFromList = 'اختر من القائمة';
+
     if (isGetedNullable('phone') && !preg_match('/^07[0-9]{8}$|^06[0-9]{8}$|^05[0-9]{8}$|^$/', $_GET['phone'])) {
-		$error['phone'] = 'should be oreedoo, mobilis, or djezzy';
+		$error['phone'] = 'اوريدو جيزي او موبيليس فقط';
 	}
 
     if (isGetedNullable('first_name') && !preg_match('/^[-\' \p{L}]+$/u', $_GET['first_name'])) {
@@ -14,27 +16,27 @@ if(isGetedNullable('save')){
 	}
 
     if (isGetedNullable('last_name') && !preg_match('/^[-\' \p{L}]+$/u', $_GET['last_name'])) {
-		$error['show_name'] = 'should be a first name';
+		$error['show_name'] = 'حروف فقط ';
 	}
 
     if (isGetedNullable('show_name') && !in_array(isGetedNullable('show_name'), ['f', 't'])) {
-		$error['show_name'] = 'select from the list';
+		$error['show_name'] = $chooseFromList;
 	}
 
     if (isGetedNullable('able_to_donate') && !in_array(isGetedNullable('able_to_donate'), ['f', 't'])) {
-		$error['able_to_donate'] = 'select from the list';
+		$error['able_to_donate'] = $chooseFromList;
 	}
 
     if (isGetedNullable('year_of_birth') && !is_numeric($_GET['year_of_birth'])) {
-		$error['year_of_birth'] = 'select from the list';
+		$error['year_of_birth'] = $chooseFromList;
 	}
 
     if (isGetedNullable('last_donation') && !checkdate(explode('-', $_GET['last_donation'])[1], explode('-', $_GET['last_donation'])[2], explode('-', $_GET['last_donation'])[0])) {
-		$error['last_donation'] = 'should be a date';
+		$error['last_donation'] = 'استعمل المفتاح';
 	}
 
     if (isGetedNullable('ville_id') && !is_numeric($_GET['ville_id'])) {
-		$error['ville_id'] = 'select from the list';
+		$error['ville_id'] = $chooseFromList;
 	}
 
     if(empty($error)){
