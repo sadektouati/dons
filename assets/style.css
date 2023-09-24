@@ -160,6 +160,7 @@ input:disabled, select:disabled{
 
 form fieldset > .row > *{
     text-align: center;
+    max-width: 7rem;
 }
 
 body > form {
