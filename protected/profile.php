@@ -4,7 +4,7 @@ $error = [];
 $isDisabled = isGetedNullable('edit') ? '' : 'disabled';
 
 if(isGetedNullable('save')){
-
+    $_GET['edit'] = 'true';
     if (isGetedNullable('phone') && !preg_match('/^07[0-9]{8}$|^06[0-9]{8}$|^05[0-9]{8}$|^$/', $_GET['phone'])) {
 		$error['phone'] = 'should be oreedoo, mobilis, or djezzy';
 	}
@@ -73,7 +73,7 @@ $bloodTypes = pg_fetch_all($bloodTypesQuery);
         <fieldset>
             <span class="<?= empty($error['phone']) ? '' : 'hasError' ?>">
                 <label>الهاتف</label>
-                <input type="tel" name="phone" value="<?= $profile['phone']?>" <?= $isDisabled ?>>
+                <input type="tel" name="phone" value="<?= $_GET['phone'] ?? $profile['phone']?>" <?= $isDisabled ?>>
                 <span><?= $error['phone'] ?? ''?></span>
             </span>
         </fieldset>
@@ -84,7 +84,7 @@ $bloodTypes = pg_fetch_all($bloodTypesQuery);
                 <select name="blood_type" <?= $isDisabled ?>>
                     <option value="" disabled selected></option>
                     <?php foreach ($bloodTypes as $bloodType){ ?>
-                        <option value="<?= $bloodType['name']?>" <?= isSelected($profile['blood_type'], $bloodType['name']) ?>><?= $bloodType['name']?></option>
+                        <option value="<?= $bloodType['name']?>" <?= isSelected( $bloodType['name'], $_GET['blood_type'] ?? $profile['blood_type']) ?>><?= $bloodType['name']?></option>
                     <?php } ?>
                 </select>
                 <span><?= $error['blood_type'] ?? ''?></span>
@@ -92,7 +92,7 @@ $bloodTypes = pg_fetch_all($bloodTypesQuery);
 
             <span class="<?= empty($error['last_donation']) ? '' : 'hasError' ?>">
                 <label>التبرع الأخير</label>
-                <input type="date" name="last_donation" value="<?= $profile['last_donation']?>" <?= $isDisabled ?>>
+                <input type="date" name="last_donation" value="<?= $_GET['last_donation'] ?? $profile['last_donation']?>" <?= $isDisabled ?>>
                 <span><?= $error['last_donation'] ?? ''?></span>
             </span>
 
@@ -100,8 +100,8 @@ $bloodTypes = pg_fetch_all($bloodTypesQuery);
                 <label>قادر على التبرع</label>
                 <select name="able_to_donate" <?= $isDisabled ?>>
                     <option value="" disabled selected></option>
-                    <option value="t" <?= isSelected($profile['able_to_donate'], 't') ?>>نعم</option>
-                    <option value="f" <?= isSelected($profile['able_to_donate'], 'f') ?>>لا</option>
+                    <option value="t" <?= isSelected('t', $_GET['able_to_donate'] ?? $profile['able_to_donate']) ?>>نعم</option>
+                    <option value="f" <?= isSelected('f', $_GET['able_to_donate'] ?? $profile['able_to_donate']) ?>>لا</option>
                 </select>
                 <span><?= $error['able_to_donate'] ?? ''?></span>
             </span>
@@ -114,7 +114,7 @@ $bloodTypes = pg_fetch_all($bloodTypesQuery);
                 <select name="wilaya_id" <?= $isDisabled ?>>
                     <option value="" disabled selected></option>
                     <?php foreach ($wilayas as $wilaya){ ?>
-                        <option value="<?= $wilaya['wilaya_id']?>" <?= isSelected($profile['wilaya_id'], $wilaya['wilaya_id']) ?>><?= $wilaya['wilaya_id']?> - <?= $wilaya['name']?></option>
+                        <option value="<?= $wilaya['wilaya_id']?>" <?= isSelected($wilaya['wilaya_id'], $_GET['wilaya_id'] ?? $profile['wilaya_id']) ?>><?= $wilaya['wilaya_id']?> - <?= $wilaya['name']?></option>
                     <?php } ?>
                 </select>
                 <span><?= $error['wilaya_id'] ?? ''?></span>
@@ -125,7 +125,7 @@ $bloodTypes = pg_fetch_all($bloodTypesQuery);
                 <select name="ville_id" <?= $isDisabled ?>>
                     <option value="" disabled selected></option>
                     <?php foreach ($villes as $ville){ ?>
-                        <option value="<?= $ville['ville_id']?>" <?= isSelected($profile['ville_id'], $ville['ville_id']) ?>><?= $ville['name']?></option>
+                        <option value="<?= $ville['ville_id']?>" <?= isSelected($ville['ville_id'], $_GET['ville_id'] ?? $profile['ville_id']) ?>><?= $ville['name']?></option>
                     <?php } ?>
                 </select>
                 <span><?= $error['ville_id'] ?? ''?></span>
@@ -137,13 +137,13 @@ $bloodTypes = pg_fetch_all($bloodTypesQuery);
 
             <span class="<?= empty($error['first_name']) ? '' : 'hasError' ?>">
                 <label>الاسم</label>
-                <input type="text" name="first_name" value="<?= $profile['first_name']?>" <?= $isDisabled ?>>
+                <input type="text" name="first_name" value="<?= $_GET['first_name'] ?? $profile['first_name']?>" <?= $isDisabled ?>>
                 <span><?= $error['first_name'] ?? ''?></span>
             </span>
 
             <span class="<?= empty($error['blood_type']) ? '' : 'hasError' ?>">
                 <label>اللقب</label>
-                <input type="text" name="last_name" value="<?= $profile['last_name']?>" <?= $isDisabled ?>>
+                <input type="text" name="last_name" value="<?= $_GET['last_name'] ?? $profile['last_name']?>" <?= $isDisabled ?>>
                 <span><?= $error['last_name'] ?? ''?></span>
             </span>
 
@@ -151,8 +151,8 @@ $bloodTypes = pg_fetch_all($bloodTypesQuery);
                 <label>اظهر اسمي في البحث</label>
                 <select name="show_name" <?= $isDisabled ?>>
                     <option value="" disabled selected></option>
-                    <option value="t" <?= isSelected($profile['show_name'], 't') ?>>نعم</option>
-                    <option value="f" <?= isSelected($profile['show_name'], 'f') ?>>لا</option>
+                    <option value="t" <?= isSelected('t', $_GET['show_name'] ?? $profile['show_name']) ?>>نعم</option>
+                    <option value="f" <?= isSelected('f', $_GET['show_name'] ?? $profile['show_name']) ?>>لا</option>
                 </select>
                 <span><?= $error['show_name'] ?? ''?></span>
             </span>
@@ -162,7 +162,7 @@ $bloodTypes = pg_fetch_all($bloodTypesQuery);
                 <select name="year_of_birth" <?= $isDisabled ?>>
                     <option value="" disabled selected></option>
                     <?php for ($i=date('Y') - 18; $i >=date('Y') - 65; $i--){ ?>
-                        <option value="<?= $i?>" <?= isSelected($profile['year_of_birth'], $i) ?>><?= $i?></option>
+                        <option value="<?= $i?>" <?= isSelected($i, $_GET['year_of_birth'] ?? $profile['year_of_birth']) ?>><?= $i?></option>
                     <?php } ?>
                 </select>
                 <span><?= $error['year_of_birth'] ?? ''?></span>
