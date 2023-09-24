@@ -27,7 +27,7 @@ $bloodTypes = pg_fetch_all($bloodTypesQuery);
         <?php } ?>
     </select>
 
-    <select name="wilaya_id">
+    <select name="wilaya_id" class="_reload">
         <option value="" disabled selected>ولاية</option>
         <?php foreach ($wilayas as $wilaya){ ?>
             <option value="<?= $wilaya['wilaya_id']?>" <?= isSelected(isGetedNullable('wilaya_id'), $wilaya['wilaya_id']) ?>><?= $wilaya['wilaya_id']?> - <?= $wilaya['name']?></option>
@@ -35,7 +35,7 @@ $bloodTypes = pg_fetch_all($bloodTypesQuery);
     </select>
 
     <?php if(isGetedNullable('wilaya_id')){ ?>
-        <select name="ville_id">
+        <select name="ville_id" class="_reload">
             <option value="" disabled selected>مدينة</option>
             <?php foreach ($villes as $ville){ ?>
                 <option value="<?= $ville['ville_id']?>" <?= isSelected(isGetedNullable('ville_id'), $ville['ville_id']) ?>><?= $ville['name']?></option>
@@ -58,8 +58,8 @@ $bloodTypes = pg_fetch_all($bloodTypesQuery);
             </p>
         <?php
         }elseif(empty($profile)){ ?>
-            <header>no results</header>
-            <p>suggestions....</p>
+            <header>للاسف لم نجد متبرعين</header>
+            <p>اقتراحات</p>
             <?php if(isGetedNullable('ville_id')){ ?>
             <p>
             قد تجد متبرعين من خلال البحث في جميع المدن 
