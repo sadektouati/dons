@@ -82,8 +82,8 @@ form.login{
 
 form.login a {
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 1rem;
     padding: 0.5rem 2rem;
     white-space: nowrap;
     box-shadow: 0 0 7px 2px #cccfdf;

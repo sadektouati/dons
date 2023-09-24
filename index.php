@@ -16,14 +16,16 @@ require('vendor/autoload.php');
 require('db/connection.php');
 require('lib/index.php');
 
-if( empty($_SESSION['social_id']) == false and ($url == '/login' or $url == '/signin/ggl') ) header('location: /');
+if( empty($_SESSION['social_id']) == false and (in_array($url, ['/login', '/signin/ggl'])) ) header('location: /');
+
+if( empty($_SESSION['social_id']) and $url == '/profile' ) header('location: /login');
 
 include('protected/header.php');
 
-    if( ( $url == '/profile' or $url == '/login' ) and empty($_SESSION['social_id']) ){
+    if( $url == '/login' ){
         include('protected/login.php');
 
-    }elseif( $url == '/signin/ggl' and empty($_SESSION['social_id']) ){
+    }elseif( $url == '/signin/ggl' ){
         include('protected/signin.php');
 
     }elseif( $url == '/profile' ){
