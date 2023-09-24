@@ -1,7 +1,8 @@
 <?php
 
 $error = [];
-$isDisabled = isGetedNullable('edit') || isGetedNullable('save') ? '' : 'disabled';
+if(isGetedNullable('save')) $_GET['edit'] = true;
+$isDisabled = isGetedNullable('edit') ? '' : 'disabled';
 
 if(isGetedNullable('save')){
 
